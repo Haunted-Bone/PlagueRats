@@ -1,0 +1,20 @@
+classDiagram
+    RatGame --> Game : implements
+    MainMenuScreen --> Screen : implements
+    MainMenuScreen --> RatGame : associates
+    class RatGame {
+        +create()
+    }
+    class MainMenuScreen {
+        -final RatGame game
+        -Stage stage
+        -Skin Skin
+        -OrthographicCamera camera
+
+        +MainMenuScreen(final RatGame game)
+        +show()
+        +render()
+        +resize()
+        +hide()
+        +dispose()
+    }
