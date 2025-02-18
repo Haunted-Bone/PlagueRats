@@ -31,8 +31,3 @@ Useful Gradle tasks and flags:
 
 Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
 For example, `core:clean` removes `build` folder only from the `core` project.
-
-## Individual Sprint 01 Research
-
-For research I made a simple game with LibGDX's tutorial "A Simple Game" and used DeepSeek's chatbot to plan out how to code a main menu.
-see "MainMenuDiagram.mermaid" for UML Diagram.
