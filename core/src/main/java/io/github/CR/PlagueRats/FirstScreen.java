@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import io.github.CR.PlagueRats.GUI.ButtonFactory;
 
 public class FirstScreen implements Screen {
 
@@ -20,9 +21,11 @@ public class FirstScreen implements Screen {
     private final SpriteBatch batch;
     private final Texture background;
     private final Stage stage;
+    private int screen = 0;
     private Skin skin;
     private FileHandle fileHandle;
     private String jsonString;
+    ButtonFactory gFact;
 
     public FirstScreen(final RatGame game) {
 
@@ -40,25 +43,38 @@ public class FirstScreen implements Screen {
         fileHandle = Gdx.files.internal("ui/uiskin.json");
         jsonString = fileHandle.readString();
         skin = new Skin(fileHandle); // Load UI skin
+        gFact = new ButtonFactory();
 
         // Create "Play" button
-        TextButton playButton = new TextButton("Play", skin);
-        playButton.setPosition((float) Gdx.graphics.getWidth() / 2 - 50, (float) Gdx.graphics.getHeight() / 2 - 25);
-        playButton.setSize(100, 50);
+        TextButton playButton = gFact.createButton("Play", skin);
 
         // Create "Settings" button
-        // TextButton settingsButton = new
+        TextButton settingsButton = gFact.createButton("Settings", skin);
 
-            // Add listener to the "Play" button
-            playButton.addListener(new ClickListener() {
+        // Add listener to the "Play" button
+        playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameScreen(game)); // Switch to the game screen
             }
         });
 
+        // Add listener to the "Settings" button
+        settingsButton.addListener(new ClickListener() {
+           @Override
+           public void clicked(InputEvent event, float x, float y) {
+                screen = 1;
+            }
+        });
         // Add button to the stage
-        stage.addActor(playButton);
+        if(screen == 0) {
+            stage.clear();
+            stage.addActor(playButton);
+            stage.addActor(settingsButton);
+        }
+        else if (screen == 1) {
+            stage.clear();
+        }
 
     }
 
@@ -114,5 +130,9 @@ public class FirstScreen implements Screen {
         background.dispose();
         stage.dispose();
         skin.dispose();
+    }
+
+    public void clearUI() {
+        stage.dispose();
     }
 }
