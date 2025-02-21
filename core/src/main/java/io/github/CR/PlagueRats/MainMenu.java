@@ -7,27 +7,23 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import io.github.CR.PlagueRats.GUI.ButtonFactory;
+import io.github.CR.PlagueRats.GUI.GUIFactory;
 
-public class FirstScreen implements Screen {
+public class MainMenu implements Screen {
 
-    private final OrthographicCamera camera;
-    private final SpriteBatch batch;
-    private final Texture background;
-    private final Stage stage;
-    private int screen = 0;
-    private Skin skin;
-    private FileHandle fileHandle;
-    private String jsonString;
-    ButtonFactory gFact;
+    public OrthographicCamera camera;
+    public SpriteBatch batch;
+    public Texture background;
+    public Stage stage;
+    public Skin skin;
+    public FileHandle fileHandle;
+    public String jsonString;
+    GUIFactory gFact;
 
-    public FirstScreen(final RatGame game) {
+    public MainMenu() {
 
         // Create camera and SpriteBatch
         camera = new OrthographicCamera();
@@ -43,40 +39,11 @@ public class FirstScreen implements Screen {
         fileHandle = Gdx.files.internal("ui/uiskin.json");
         jsonString = fileHandle.readString();
         skin = new Skin(fileHandle); // Load UI skin
-        gFact = new ButtonFactory();
-
-        // Create "Play" button
-        TextButton playButton = gFact.createButton("Play", skin);
-
-        // Create "Settings" button
-        TextButton settingsButton = gFact.createButton("Settings", skin);
-
-        // Add listener to the "Play" button
-        playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game)); // Switch to the game screen
-            }
-        });
-
-        // Add listener to the "Settings" button
-        settingsButton.addListener(new ClickListener() {
-           @Override
-           public void clicked(InputEvent event, float x, float y) {
-                screen = 1;
-            }
-        });
-        // Add button to the stage
-        if(screen == 0) {
-            stage.clear();
-            stage.addActor(playButton);
-            stage.addActor(settingsButton);
-        }
-        else if (screen == 1) {
-            stage.clear();
-        }
+        gFact = new GUIFactory();
 
     }
+
+
 
     @Override
     public void show() {

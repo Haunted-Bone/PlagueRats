@@ -6,6 +6,6 @@ import com.badlogic.gdx.Game;
 public class RatGame extends Game {
     @Override
     public void create() {
-        setScreen(new FirstScreen(this));
+        setScreen(new FirstMenu(this));
     }
 }

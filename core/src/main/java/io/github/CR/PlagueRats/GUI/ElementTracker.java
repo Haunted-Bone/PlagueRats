@@ -1,15 +1,14 @@
 package io.github.CR.PlagueRats.GUI;
 
 public class ElementTracker {
-    private int buttonCount;
+    private int elementCount;
     private int buttonID;
 
-    public void addButton() {
-        buttonCount++;
-
+    public void addElement() {
+        elementCount++;
     }
 
-    public int getButtonCount() {
-        return buttonCount;
+    public int getElementCount() {
+        return elementCount;
     }
 }

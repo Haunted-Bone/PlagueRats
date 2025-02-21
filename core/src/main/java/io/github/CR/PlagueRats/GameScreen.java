@@ -23,6 +23,7 @@ public class GameScreen implements Screen {
     Sprite ratSprite;
     Vector2 touchPos;
 
+
     public GameScreen(final RatGame game) {
 
         // Create camera and SpriteBatch
