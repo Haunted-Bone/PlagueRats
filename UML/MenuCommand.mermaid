@@ -1,0 +1,34 @@
+classDiagram
+    note "Command Design Pattern for Main Menu Buttons"
+    QuitGame ..|> Command
+    QuitGame *-- Receiver
+    QuitGame --> Receiver
+    Invoker *-- Command
+    Invoker --> Command
+    Button --> Receiver
+    Button --> QuitGame
+    Button --> Invoker
+    class Command {
+        <<interface>>
+        +execute(): void
+        +undo()
+    }
+    class QuitGame {
+        -Receiver receiver
+        +QuitGame(Receiver receiver)
+        +execute(): void "receiver.action()"
+        +undo() "overriden"
+    }
+    class Receiver {
+        +action()
+    }
+    class Invoker {
+        -Command command
+        +Invoker(Command command)
+        +setCommand()
+    }
+    class Button {
+        -Receiver r
+        -Command concreteCommand
+        -Invoker i
+    }

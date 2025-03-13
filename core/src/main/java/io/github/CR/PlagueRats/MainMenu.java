@@ -27,7 +27,6 @@ public class MainMenu implements Screen {
     //   Implement the Command Design Pattern for the UI buttons with a receiver class that handles the different button functions
 
     public MainMenu() {
-
         // Create camera and SpriteBatch
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

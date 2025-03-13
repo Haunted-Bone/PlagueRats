@@ -9,9 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class FirstMenu extends MainMenu {
     private final String[] buttonNames;
 
-
     public FirstMenu(final RatGame game) {
-
 
          buttonNames = new String[] {
             "Play", "Settings", "Quit"
@@ -51,7 +49,6 @@ public class FirstMenu extends MainMenu {
             }
         });
         // Add button to the stage
-        stage.addActor(title);
         stage.addActor(playButton);
         stage.addActor(settingsButton);
         stage.addActor(quitButton);
