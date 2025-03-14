@@ -2,6 +2,7 @@ package io.github.CR.PlagueRats;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -21,6 +22,8 @@ public class MainMenu implements Screen {
     public Skin skin;
     public FileHandle fileHandle;
     public String jsonString;
+    public Sound selectionSound;
+    public Sound quitSound;
     GUIFactory gFact;
 
     // TODO
@@ -42,10 +45,9 @@ public class MainMenu implements Screen {
         jsonString = fileHandle.readString();
         skin = new Skin(fileHandle); // Load UI skin
         gFact = new GUIFactory();
-
+        selectionSound = Gdx.audio.newSound(Gdx.files.internal("audio/sfx/menu_select.wav"));
+        quitSound = Gdx.audio.newSound(Gdx.files.internal("audio/sfx/menu_close.wav"));
     }
-
-
 
     @Override
     public void show() {

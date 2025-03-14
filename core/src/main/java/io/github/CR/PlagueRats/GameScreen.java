@@ -9,10 +9,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.TimerTask;
 
@@ -27,7 +29,12 @@ public class GameScreen implements Screen {
     Sprite ratSprite;
     Vector2 touchPos;
     Timer timer;
+    // Create sound player
     Sound ratSound;
+//    ShapeDrawer shape;
+//    TextureRegion region;
+    Texture buttonTexture;
+
 
 
     public GameScreen(final RatGame game) {
@@ -40,9 +47,16 @@ public class GameScreen implements Screen {
         viewport = new FitViewport(8, 5);
         ratPosX = ((float) Gdx.graphics.getWidth() / 2) - 200;
         ratPosY = ((float) Gdx.graphics.getHeight() / 2) - 200;
+
         ratSprite = new Sprite(ratTexture);
         touchPos = new Vector2();
+        buttonTexture = new Texture("testButton.png");
+//        region = new TextureRegion(ratTexture, 20, 20, 50, 50);
+
+
+        // Defines Sound asset
         ratSound = Gdx.audio.newSound(Gdx.files.internal("audio/sfx/squeak.mp3"));
+//        shape = new ShapeDrawer(batch, )
 
     }
 
@@ -75,7 +89,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Update camera
-         camera.update();
+        camera.update();
 
 //        viewport.apply();
 
@@ -90,6 +104,7 @@ public class GameScreen implements Screen {
     }
 
     private void logic() {
+        ratSprite.setSize(60, 60);
 
     }
 
@@ -102,6 +117,7 @@ public class GameScreen implements Screen {
         if (Gdx.input.isTouched()) {
             // Moves sprite up and plays a squeak sound when you click
             ratSprite.translateY(40);
+            // Plays sound
             ratSound.play();
         }
     }

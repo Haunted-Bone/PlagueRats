@@ -3,32 +3,41 @@ classDiagram
     QuitGame ..|> Command
     QuitGame *-- Receiver
     QuitGame --> Receiver
+    GoToSettings ..|> Command
+    GoToSettings *-- Receiver
+    GoToSettings --> Receiver
     Invoker *-- Command
     Invoker --> Command
-    Button --> Receiver
-    Button --> QuitGame
-    Button --> Invoker
+    FirstMenu --> Receiver
+    FirstMenu --> QuitGame
+    FirstMenu --> Invoker
     class Command {
         <<interface>>
         +execute(): void
-        +undo()
     }
     class QuitGame {
         -Receiver receiver
         +QuitGame(Receiver receiver)
-        +execute(): void "receiver.action()"
-        +undo() "overriden"
+        +execute(): void "receiver.quitGame()"
+    }
+    class GoToSettings {
+        -Receiver receiver
+        +GoToSettings(Receiver receiver)
+        +execute(): void "receiver.settings()"
     }
     class Receiver {
-        +action()
+        -RatGame game
+        +quitGame(): void
+        +settings(): void
     }
     class Invoker {
         -Command command
         +Invoker(Command command)
-        +setCommand()
+        +execute(): void
     }
-    class Button {
+    class FirstMenu {
         -Receiver r
-        -Command concreteCommand
+        -Command quitCommand
+        -Command settingsCommand
         -Invoker i
     }
