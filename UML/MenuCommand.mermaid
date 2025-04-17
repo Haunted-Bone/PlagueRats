@@ -1,0 +1,43 @@
+classDiagram
+    note "Command Design Pattern for Main Menu Buttons"
+    QuitGame ..|> Command
+    QuitGame *-- Receiver
+    QuitGame --> Receiver
+    GoToSettings ..|> Command
+    GoToSettings *-- Receiver
+    GoToSettings --> Receiver
+    Invoker *-- Command
+    Invoker --> Command
+    FirstMenu --> Receiver
+    FirstMenu --> QuitGame
+    FirstMenu --> Invoker
+    class Command {
+        <<interface>>
+        +execute(): void
+    }
+    class QuitGame {
+        -Receiver receiver
+        +QuitGame(Receiver receiver)
+        +execute(): void "receiver.quitGame()"
+    }
+    class GoToSettings {
+        -Receiver receiver
+        +GoToSettings(Receiver receiver)
+        +execute(): void "receiver.settings()"
+    }
+    class Receiver {
+        -RatGame game
+        +quitGame(): void
+        +settings(): void
+    }
+    class Invoker {
+        -Command command
+        +Invoker(Command command)
+        +execute(): void
+    }
+    class FirstMenu {
+        -Receiver r
+        -Command quitCommand
+        -Command settingsCommand
+        -Invoker i
+    }
